@@ -1,0 +1,43 @@
+{
+  // Visit https://aka.ms/tsconfig to read more about this file
+  "compilerOptions": {
+    // Environment Settings
+    // See also https://aka.ms/tsconfig/module
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    //编译目标与模块系统
+    "module": "ESNext", //指定系统模块为EsNext
+    "target": "ESNext",
+    "moduleResolution": "bundler", //专为打包工具设计，允许省略扩展名（如import {x} from './y'），并支持现代模块系统特性（如exports/imports映射）。 ‌
+    "esModuleInterop": true,//解决commonjs和es模块导入问题
+    "types": ["vite/client","node"], //自动导入的类型声明文件
+    "typeRoots": ["node_modules/@types","typings"],
+    "lib": ["esnext","dom","dom.iterable"],
+    // Other Outputs
+    "sourceMap": true, //生成sourceMap文件
+    "declaration": true,
+    "declarationMap": true,
+    // Stricter Typechecking Options
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    // Recommended Options
+    "strict": true, //开启严格模式
+    "noImplicitAny": true, //禁止隐式any类型（严格模式默认开启）
+    "strictNullChecks": true,//强制null/undefined 检查
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "jsxFragmentFactory": "vue",
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "checkJs": true,
+    "allowImportingTsExtensions": true
+  },
+  "include": ["src/**/*.ts","src/**/*.tsx","src/**/*.vue","typings/**/*.d.ts","vite.config.ts"],
+  "exclude": ["node_modules","dist"],
+  "references": []
+}
