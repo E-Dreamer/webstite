@@ -1,7 +1,8 @@
-import type {Component} from "vue";
-
 // 全局
+import type { RouteRecordRaw } from 'vue-router'
+
 declare global {
+  // 定义一个接口 用来限制后端返回的路由list信息
   interface BackData {
     pId:string;
     id:string;
@@ -13,19 +14,5 @@ declare global {
     hidden?:boolean;
     hiddenHeader?:boolean;
   }
-  // 定义的路由
-  interface CustomRoute {
-    path:string;
-    name: string;
-    component:Component;
-    redirect?:string;
-    id?:string;
-    meta:{
-      title: string;
-      keepAlive:boolean;
-      hidden:boolean;
-      hiddenHeader:boolean;
-    },
-    children?:CustomRoute[];
-  }
+  type CustomRoute = RouteRecordRaw & {id?:string}
 }

@@ -15,6 +15,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@koa/router": "^14.0.0",
     "@vue/server-renderer": "^3.5.18",
     "koa": "^3.0.1",
     "koa-connect": "^2.1.0",

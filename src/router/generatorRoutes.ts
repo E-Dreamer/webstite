@@ -89,7 +89,6 @@ export function changeRoute(backItem:BackData,children:CustomRoute[]):CustomRout
     name:backItem.key,
     component,
     id:backItem.id,
-    // redirect:'',
     meta:{
       title:backItem.title,
       keepAlive:true,
