@@ -1,5 +1,3 @@
-class EventEmitter {
-
-}
+class EventEmitter {}
 
 export default EventEmitter

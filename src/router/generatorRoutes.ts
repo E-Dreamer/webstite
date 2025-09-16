@@ -1,11 +1,11 @@
 // 基础路由
-import type {Component} from "vue";
+import type { Component } from 'vue'
 import BlankLayout from '@/layouts/BlankLayout.vue'
-import BasicLayout from "@/layouts/BasicLayout.vue";
+import BasicLayout from '@/layouts/BasicLayout.vue'
 export const baseRoutes: CustomRoute[] = [
   {
     path: '/',
-    name:'basic',
+    name: 'basic',
     component: BasicLayout,
     redirect: '/home',
     meta: {
@@ -42,19 +42,19 @@ export const baseRoutes: CustomRoute[] = [
       // 菜单是否隐藏头部
       hiddenHeader: false,
     },
-  }
+  },
 ]
 
-export const noFoundRoute:CustomRoute = {
-  path:'/:pathMatch(.*)*',
-  name:"404",
-  component:()=>import('@/views/404.vue'),
+export const noFoundRoute: CustomRoute = {
+  path: '/:pathMatch(.*)*',
+  name: '404',
+  component: () => import('@/views/404.vue'),
   meta: {
     title: '页面未找到',
-    keepAlive:true,
-    hidden:true,
+    keepAlive: true,
+    hidden: true,
     hiddenHeader: false,
-  }
+  },
 }
 
 /**
@@ -62,7 +62,7 @@ export const noFoundRoute:CustomRoute = {
  * @param name
  * @returns {Component}
  */
-export function resolveComponent(name:string):Component {
+export function resolveComponent(name: string): Component {
   const pages = import.meta.glob('../views/**/*.vue')
   const importPage = pages[`../views/${name}.vue`]
   if (!importPage) {
@@ -76,27 +76,29 @@ export function resolveComponent(name:string):Component {
  * @param backItem{BackData} 后端返回的数据
  * @param children{CustomRoute[]} 根据list寻找到的children
  */
-export function changeRoute(backItem:BackData,children:CustomRoute[]):CustomRoute{
-  let component;
-  if(backItem.component === 'PageView'){
-    component = BlankLayout;
-  }else {
-    let componentName = backItem.component.startsWith('/') ? backItem.component.substring(1) : backItem.component
+export function changeRoute(backItem: BackData, children: CustomRoute[]): CustomRoute {
+  let component
+  if (backItem.component === 'PageView') {
+    component = BlankLayout
+  } else {
+    let componentName = backItem.component.startsWith('/')
+      ? backItem.component.substring(1)
+      : backItem.component
     component = resolveComponent(componentName)
   }
   return {
-    path:backItem.path,
-    name:backItem.key,
+    path: backItem.path,
+    name: backItem.key,
     component,
-    id:backItem.id,
-    meta:{
-      title:backItem.title,
-      keepAlive:true,
-      hidden:backItem?.hidden ?? false,
-      hiddenHeader:backItem?.hiddenHeader ?? false,
+    id: backItem.id,
+    meta: {
+      title: backItem.title,
+      keepAlive: true,
+      hidden: backItem?.hidden ?? false,
+      hiddenHeader: backItem?.hiddenHeader ?? false,
     },
-    children
-  };
+    children,
+  }
 }
 /**
  * 将后端返回的list 转换成Routes
@@ -104,13 +106,16 @@ export function changeRoute(backItem:BackData,children:CustomRoute[]):CustomRout
  * @param pId 父节点
  * @returns {[]}
  */
-export function generatorRoutes(list:BackData[],pId:string):CustomRoute[]{
-  let tree:CustomRoute[] = []
-  list.forEach(item=>{
-    if(item.pId === pId){
-      let children = generatorRoutes(list.filter(i=>i.pId === item.id),item.id);
-      tree.push(changeRoute(item,children))
+export function generatorRoutes(list: BackData[], pId: string): CustomRoute[] {
+  let tree: CustomRoute[] = []
+  list.forEach((item) => {
+    if (item.pId === pId) {
+      let children = generatorRoutes(
+        list.filter((i) => i.pId === item.id),
+        item.id,
+      )
+      tree.push(changeRoute(item, children))
     }
   })
-  return tree;
+  return tree
 }

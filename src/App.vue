@@ -6,5 +6,4 @@ import { RouterView } from 'vue-router'
   <RouterView />
 </template>
 
-<style scoped lang="less">
-</style>
+<style scoped lang="less"></style>

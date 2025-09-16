@@ -7,26 +7,36 @@ export default defineComponent({
   setup() {
     const router = useRouter()
     const store = userRouteStore()
-    console.log(store.menu,store.addRoutes)
-    function menuClick(item:CustomRoute){
-      if(item.children?.length) return;
-      router.push({path:item.path})
+    console.log(store.menu, store.addRoutes)
+    function menuClick(item: CustomRoute) {
+      if (item.children?.length) return
+      router.push({ path: item.path })
     }
-    const MenuItem = (item:CustomRoute) =>{
-      if(item?.meta?.hidden) return ''
-      return (<div key={item.name} style={{cursor: 'pointer',marginLeft:'10px'}} onClick={()=>menuClick(item)}>{item?.meta?.title}</div>)
+    const MenuItem = (item: CustomRoute) => {
+      if (item?.meta?.hidden) return ''
+      return (
+        <div
+          key={item.name}
+          style={{ cursor: 'pointer', marginLeft: '10px' }}
+          onClick={() => menuClick(item)}
+        >
+          {item?.meta?.title}
+        </div>
+      )
     }
-    const Menu = (list:CustomRoute[])=>{
+    const Menu = (list: CustomRoute[]) => {
       return list.map((item) => {
         if (item.children?.length) {
-          return <div>
-            {MenuItem(item)}
-            {Menu(item.children)}
-          </div>
+          return (
+            <div>
+              {MenuItem(item)}
+              {Menu(item.children)}
+            </div>
+          )
         }
         return MenuItem(item)
       })
     }
-    return ()=><header style={{display:'flex'}}>{ Menu(store.menu) }</header>
+    return () => <header style={{ display: 'flex' }}>{Menu(store.menu)}</header>
   },
 })

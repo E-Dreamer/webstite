@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import customMenu from '@/components/menu.tsx'
-import {RouterView} from 'vue-router'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
   <div class="BasicLayout">
-    <customMenu class="Menu"/>
+    <customMenu class="Menu" />
     <RouterView />
   </div>
 </template>
@@ -13,6 +13,6 @@ import {RouterView} from 'vue-router'
 <style scoped lang="less">
 .Menu {
   background: #000;
-  color:#fff;
+  color: #fff;
 }
 </style>
