@@ -25,9 +25,9 @@ function guards(router:Router){
     const {getUserRoutes} = routeStore
     if(!hasToken){
       getUserRoutes().then((res:CustomRoute[])=>{
+        console.log(res,'res')
         res.forEach(route=>{
           router.addRoute(route);
-          console.log(router,'router')
         })
         hasToken = Math.random() * 100000 + 1 +''
         next({...to,replace:true})

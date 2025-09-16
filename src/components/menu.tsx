@@ -13,8 +13,8 @@ export default defineComponent({
       router.push({path:item.path})
     }
     const MenuItem = (item:CustomRoute) =>{
-      if(item.meta.hidden) return ''
-      return (<div key={item.name} style={{cursor: 'pointer',marginLeft:'10px'}} onClick={()=>menuClick(item)}>{item.meta.title}</div>)
+      if(item?.meta?.hidden) return ''
+      return (<div key={item.name} style={{cursor: 'pointer',marginLeft:'10px'}} onClick={()=>menuClick(item)}>{item?.meta?.title}</div>)
     }
     const Menu = (list:CustomRoute[])=>{
       return list.map((item) => {
