@@ -8,10 +8,10 @@ export default defineConfig([
   {
     name: 'app/files-to-lint',
     files: ['**/*.{js,mjs,jsx,vue}'],
-    rules:{
+    rules: {
       // multi-eslint默认文件名需要多单词，在ignores中配置单个单词文件可避免报错
-      "vue/multi-word-component-names":['error',{'ignores':['home']}]
-    }
+      'vue/multi-word-component-names': ['error', { ignores: ['home', 'ceshi', 'ceshi2', '404'] }],
+    },
   },
 
   globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
@@ -26,5 +26,5 @@ export default defineConfig([
 
   js.configs.recommended,
   ...pluginVue.configs['flat/essential'],
-  skipFormatting
+  skipFormatting,
 ])
