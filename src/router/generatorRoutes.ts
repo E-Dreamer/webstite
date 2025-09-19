@@ -1,12 +1,11 @@
 // 基础路由
 import type { Component } from 'vue'
 import BlankLayout from '@/layouts/BlankLayout.vue'
-import BasicLayout from '@/layouts/BasicLayout.vue'
 export const baseRoutes: CustomRoute[] = [
   {
     path: '/',
     name: 'basic',
-    component: BasicLayout,
+    component: () => import('@/layouts/BasicLayout.vue'),
     redirect: '/home',
     meta: {
       title: '基本框架',
@@ -43,11 +42,22 @@ export const baseRoutes: CustomRoute[] = [
       hiddenHeader: false,
     },
   },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login.vue'),
+    meta: {
+      title: '登录页',
+      keepAlive: true,
+      hidden: true,
+      hiddenHeader: false,
+    },
+  },
 ]
 
 export const noFoundRoute: CustomRoute = {
   path: '/:pathMatch(.*)*',
-  name: '404',
+  name: 'NoFound',
   component: () => import('@/views/404.vue'),
   meta: {
     title: '页面未找到',

@@ -1,6 +1,6 @@
 # Vue 3 + TypeScript + Vite7.0项目
 
-### 内含 动态加载路由(addRoutes.ts和generatorRoutes.ts)
+### 内含 动态加载路由(userInfo.ts和generatorRoutes.ts)
 
 # ESlint+Prettier+husky+lint-stage+commitlint规范
 

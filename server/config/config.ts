@@ -5,6 +5,7 @@ type DBType = {
   password: string
   host: string
 }
+console.log(process.env, '----123123')
 // 数据库配置
 const database: DBType = {
   dbName: 'website',
